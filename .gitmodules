@@ -1,0 +1,3 @@
+[submodule "svelte-path-finder"]
+	path = svelte-path-finder
+	url = https://github.com/riseupgroup/svelte-path-finder.git

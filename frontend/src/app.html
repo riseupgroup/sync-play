@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <!--<link rel="icon" href="%sveltekit.assets%/favicon.png"/>-->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        %sveltekit.head%
+    </head>
+    <body data-sveltekit-preload-data="hover">
+        <div style="display: contents">%sveltekit.body%</div>
+    </body>
+    <script>
+        window.user = null;
+        window.refreshUser = () => {
+            window.userPromise = new Promise(async (resolve) => {
+                let res = await fetch("/auth/user");
+                if (res.ok) {
+                    window.user = await res.json();
+                    resolve(window.user);
+                } else {
+                    resolve(null);
+                }
+            });
+            return window.userPromise;
+        };
+        window.getUser = async () => {
+            if (window.user) return window.user;
+            else {
+                if (!window.userPromise) {
+                    window.refreshUser();
+                }
+                return await window.userPromise;
+            }
+        };
+    </script>
+</html>
