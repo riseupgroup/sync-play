@@ -2,8 +2,30 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <!--<link rel="icon" href="%sveltekit.assets%/favicon.png"/>-->
+        <link rel="icon" href="/favicon.ico" type="image/ico" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favicon.png" type="image/png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>SyncPlay | RiseUpGroup</title>
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sync-play.riseupgroup.net" />
+        <meta property="og:title" content="SyncPlay | a RiseUpGroup project" />
+        <meta
+            property="og:description"
+            content="Watch videos with multiple people at the same time, but with their own local files | SyncPlay is a RiseUpGroup project"
+        />
+        <!--<meta property="og:site_name" content="SyncPlay" />-->
+
+        <meta
+            property="og:image:alt"
+            content="Watch videos with multiple people at the same time, but with their own local files | SyncPlay is a RiseUpGroup project"
+        />
+        <meta property="og:image" content="https://sync-play.riseupgroup.net/favicon.png" />
+        <!--<meta property="og:image:width" content="200" />-->
+        <!--<meta property="og:image:height" content="200" />-->
+
         %sveltekit.head%
     </head>
     <body data-sveltekit-preload-data="hover">
@@ -33,4 +55,17 @@
             }
         };
     </script>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #11141f;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #fff;
+            }
+        }
+    </style>
 </html>

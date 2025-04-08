@@ -4,8 +4,8 @@ use actix_web::{cookie::SameSite, App, HttpServer};
 mod app_data;
 mod error;
 mod frontend;
-mod update_value;
 mod user;
+mod room;
 
 pub(crate) use app_data::AppData;
 
@@ -55,6 +55,7 @@ async fn main() -> std::io::Result<()> {
             )
             .configure(user::init)
             .configure(frontend::init)
+            .configure(room::init)
     })
     .bind(("0.0.0.0", port))?
     .run()

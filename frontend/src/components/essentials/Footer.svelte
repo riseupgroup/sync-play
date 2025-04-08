@@ -34,9 +34,6 @@
                     </h2>
                     <FooterLinkGroup>
                         <FooterLink liClass="mb-4" href="https://actix.rs">Actix Web</FooterLink>
-                        <FooterLink liClass="mb-4" href="https://www.sea-ql.org/SeaORM/"
-                            >SeaORM</FooterLink
-                        >
                         <FooterLink liClass="mb-4" href="https://flowbite-svelte.com"
                             >Flowbite Svelte</FooterLink
                         >

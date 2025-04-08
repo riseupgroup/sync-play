@@ -26,7 +26,7 @@
                 alt="Logo"
             ></Avatar>
             <div class="text-left">
-                <div>Actix-Svelte Example</div>
+                <div>SyncPlay</div>
                 <div class="text-sm font-medium text-gray-600 dark:text-gray-400">
                     a <A href="https://github.com/riseupgroup">RiseUpGroup</A> project
                 </div>

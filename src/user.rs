@@ -16,7 +16,7 @@ use crate::AppData;
 
 #[derive(Serialize, Deserialize)]
 pub struct SessionUser {
-    pub id: i32,
+    pub id: u32,
     pub name: String,
 }
 

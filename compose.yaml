@@ -1,0 +1,14 @@
+services:
+  app:
+    image: riseupgroup/sync-play
+    environment:
+      #PRIVATE_KEY: private.pem
+      #AUTH_SERVER_KEY: auth_server.pem
+      AUTH_SERVER_HOST: auth.riseupgroup.net
+      AUTH_SERVER_ID: 0 # replace with your auth server id (service-id)
+    ports:
+      - 80:80
+    restart: unless-stopped
+    volumes:
+      - ./private.pem:/config/private.pem:ro
+      - ./public.pem:/config/auth_server.pem:ro

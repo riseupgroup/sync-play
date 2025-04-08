@@ -41,14 +41,6 @@ fn internal_server_error<T: fmt::Debug>(err: T) -> Error {
     return ErrorInternalServerError("Internal Server Error");
 }
 
-impl ToErr for sea_orm::DbErr {
-    type Return = Error;
-
-    fn to_err(self) -> Self::Return {
-        internal_server_error(self)
-    }
-}
-
 impl ToErr for authentication_service::client::Error {
     type Return = Error;
 

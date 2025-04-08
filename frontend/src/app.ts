@@ -75,3 +75,23 @@ export function getLocalTimestamp(d: Date): string {
         d.getSeconds().toString().padStart(2, "0")
     );
 }
+
+export class RoomClient {
+    id: number = 0;
+    userId: number = 0;
+    name: string = "";
+}
+
+export class Room {
+    id: number = 0;
+    name: string = "";
+    members: RoomClient[] = [];
+}
+
+export enum PlayerCommands {
+    Ping, // Needs to be the first command
+    Play,
+    Pause,
+    UpdateTime,
+    SetTime
+}

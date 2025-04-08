@@ -11,7 +11,6 @@
         DropdownHeader,
         DropdownDivider
     } from "flowbite-svelte";
-    import { ChevronDownOutline } from "flowbite-svelte-icons";
     import type { User } from "../../app.ts";
     import { onMount } from "svelte";
     import { page } from "$app/stores";
@@ -52,20 +51,14 @@
             alt="RiseUpGroup Logo"
         />
         <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            Actix-Svelte <span class="hidden sm:inline-block">Example</span>
+            SyncPlay <span class="hidden sm:inline-block">| RiseUpGroup</span>
         </span>
     </NavBrand>
     <NavUl class="order-2 md:order-1" {activeUrl}>
         <NavLi href="/">Home</NavLi>
-        <NavLi href="/about">About</NavLi>
-        <NavLi class="cursor-pointer">
-            Projects<ChevronDownOutline class="-m-1 ml-1 inline h-6 w-6" />
-        </NavLi>
-        <Dropdown class="w-40">
-            <DropdownItem href="/projects/fivem">FiveM</DropdownItem>
-            <DropdownItem href="/projects/rxadmin">rxAdmin</DropdownItem>
-            <DropdownItem href="/projects/auth">AuthServer</DropdownItem>
-        </Dropdown>
+        {#if user != null}
+            <NavLi href="/rooms">Rooms</NavLi>
+        {/if}
         <NavLi href="https://github.com/riseupgroup">GitHub</NavLi>
         {#if user == null}
             <NavLi class="cursor-pointer" on:click={login}>Login</NavLi>
@@ -81,7 +74,6 @@
             <Dropdown placement="bottom-end" class="w-40" triggeredBy="#avatar-menu">
                 <DropdownHeader>
                     <span class="block text-sm">{user.name}</span>
-                    <span class="block truncate text-sm font-medium">ID: {user.id}</span>
                 </DropdownHeader>
                 <DropdownItem href="https://auth.riseupgroup.net">AuthServer</DropdownItem>
                 <DropdownDivider />

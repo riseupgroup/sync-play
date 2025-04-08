@@ -1,4 +1,8 @@
-use std::{cell::UnsafeCell, mem::MaybeUninit};
+use {
+    std::{cell::UnsafeCell, collections::HashMap, mem::MaybeUninit},
+    tokio::sync::RwLock,
+    crate::room::Room,
+};
 
 static APP_DATA: InitOnce<AppData> = InitOnce::new();
 
@@ -22,8 +26,8 @@ unsafe impl<T> Send for InitOnce<T> {}
 unsafe impl<T> Sync for InitOnce<T> {}
 
 pub struct AppData {
-    pub conn: sea_orm::DbConn,
     pub authentication_service: authentication_service::Client,
+    pub rooms: RwLock<HashMap<u32, RwLock<Room>>>,
 }
 
 impl AppData {
@@ -56,19 +60,9 @@ impl AppData {
             authentication_service::Client::new(server_id, &private_key, host, &server_key).unwrap()
         };
 
-        let database_url =
-            std::env::var("DATABASE_URL").expect("Missing environment variable DATABASE_URL");
-
-        let conn = sea_orm::Database::connect(&database_url)
-            .await
-            .expect("Unable to connect to database");
-        <migration::Migrator as migration::MigratorTrait>::up(&conn, None)
-            .await
-            .expect("Failed to run migrations");
-
         Self {
-            conn,
             authentication_service,
+            rooms: RwLock::new(HashMap::new()),
         }
     }
 
