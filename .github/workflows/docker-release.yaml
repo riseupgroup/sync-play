@@ -9,6 +9,7 @@ jobs:
     uses: ./.github/workflows/docker-build.yaml
     with:
       tag: "${{ github.event.release.tag_name }}"
+      latest: ${{ github.event.release.prerelease == false }}
       repository: "${{ vars.DOCKERHUB_ORG }}/${{ github.event.repository.name }}"
     secrets:
       username: ${{ secrets.DOCKERHUB_USERNAME }}

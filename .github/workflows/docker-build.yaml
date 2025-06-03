@@ -7,6 +7,11 @@ on:
         description: "Docker image tag"
         required: true
         type: string
+      latest:
+        description: "Add latest tag"
+        required: false
+        default: false
+        type: boolean
       repository:
         description: "Docker Hub repository"
         required: true
@@ -18,6 +23,7 @@ on:
       token:
         description: "Docker Hub token"
         required: true
+
 jobs:
   amd64:
     runs-on: ubuntu-latest
@@ -50,7 +56,7 @@ jobs:
             .
           DIGEST=$(jq -r '.["containerimage.digest"]' metadata.json)
           echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
-  
+
   arm64v8:
     runs-on: ubuntu-24.04-arm
     outputs:
@@ -130,8 +136,12 @@ jobs:
       
       - name: Merge and push
         run: |
+          TAGS="--tag ${{ inputs.repository }}:${{ inputs.tag }}"
+          if [[ "${{ inputs.latest }}" == "true" ]]; then
+            TAGS+=" --tag ${{ inputs.repository }}:latest"
+          fi
           docker buildx imagetools create \
-            --tag ${{ inputs.repository }}:${{ inputs.tag }} \
+            $TAGS \
             ${{ needs.amd64.outputs.digest }} \
             ${{ needs.arm64v8.outputs.digest }} \
-            ${{ needs.armv7.outputs.digest }} 
+            ${{ needs.armv7.outputs.digest }}
